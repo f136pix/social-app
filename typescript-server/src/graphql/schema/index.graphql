@@ -1,0 +1,42 @@
+#graphql
+
+#model user
+type User {
+    id: ID!
+    name: String!
+    username: String!
+    email: String!
+    password: String # password nunca deve ser retornada, logo deve ser nullable
+}
+
+#model mutation input
+input UserInput {
+    name: String!
+    email: String!
+    username: String!
+    password: String!
+}
+
+#model mutation login
+input UserLogin {
+    email: String!
+    password: String!
+}
+
+type LoginResponse {
+    jwtToken : String
+}
+
+type RootQuery {
+    users: [User!]!
+}
+
+type RootMutation {
+    createUser(userInput: UserInput) : User
+    loginUser(userLogin: UserLogin) : LoginResponse
+}
+
+schema {
+    query: RootQuery
+    mutation: RootMutation
+}
