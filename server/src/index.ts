@@ -7,6 +7,7 @@ import {AppDataSource} from "./data-source";
 import {resolvers} from "./graphql/resolvers";
 import cors from 'cors'
 import * as fs from 'fs';
+import {authenticateToken} from "./http/auth";
 
 const app: Express = express()
 app.use(bodyParser.json())
@@ -26,6 +27,7 @@ app.use('/graphql', graphqlHTTP({
     graphiql: true,
 }))
 
+app.get('/auth', authenticateToken)
 
 AppDataSource.initialize().then((): void => {
     app.listen(3000, (): void => {

@@ -1,16 +1,19 @@
-import React from 'react';
-import {Link} from 'react-router-dom';
+import {Link, NavigateFunction, useNavigate} from 'react-router-dom';
 import {zodResolver} from "@hookform/resolvers/zod"
 import {useForm} from "react-hook-form";
 import {Button} from "@/components/ui/button.tsx";
 import {Input} from "@/components/ui/input"
-import {Form, FormControl, FormDescription, FormField, FormItem, FormLabel, FormMessage,} from "@/components/ui/form"
+import {Form, FormControl, FormField, FormItem, FormLabel, FormMessage,} from "@/components/ui/form"
 import * as z from "zod"
 import {SignupValidationSchema} from "@/lib/validation";
-import {createUserAccount} from "@/services/authService.ts";
+import {useToast} from "@/components/ui/use-toast"
+import {useCreateUserMutation} from "@/react-query/queriesAndMutations.ts";
 
-function SignupForm(props) {
-    const isLoading: boolean = false
+function SignupForm() {
+    const navigate: NavigateFunction = useNavigate();
+    const {toast} = useToast()
+    const {mutateAsync: createUserAccount, isPending: isCreatingUser} = useCreateUserMutation()
+    let signupOk: boolean = false
 
     const form = useForm<z.infer<typeof SignupValidationSchema>>({
         resolver: zodResolver(SignupValidationSchema),
@@ -24,8 +27,15 @@ function SignupForm(props) {
 
     // submit handler
     async function onSubmit(values: z.infer<typeof SignupValidationSchema>) {
-        const result = await createUserAccount(values);
-        console.log(result)
+        signupOk = await createUserAccount(values)
+        if (signupOk) {
+            navigate('/login')
+            toast({
+                variant: "default",
+                title: "User criado com sucesso !",
+            })
+        }
+
     }
 
     return (
@@ -89,7 +99,7 @@ function SignupForm(props) {
                 )}
             />
                 <Button type="submit"
-                        className={'shad-button_primary'}>{isLoading ? 'Carregando...' : 'Submit'}</Button>
+                        className={'shad-button_primary'}>{isCreatingUser ? 'Carregando...' : 'Submit'}</Button>
                 <p className={'text-small-regular text-light-2 text-center mt-2'}> Já possui uma conta?
                     <Link to={'/login'} className={'text-primary-500 text-sm font-semibold ml-1'}>Entre aqui</Link>
                 </p>

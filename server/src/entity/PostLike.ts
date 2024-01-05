@@ -13,7 +13,7 @@ export class PostLike {
     @JoinColumn({ name: "user_id" })
     user!: User;
 
-    @ManyToOne(() => Post, post => post.postLikes, { onDelete: 'CASCADE' }) // One post can be liked by many users
+    @ManyToOne(() => Post, post => post.postLikes, { onDelete: 'CASCADE' }) // um post pode ser liked by many users
     @JoinColumn({ name: "post_id" })
     post!: Post;
 

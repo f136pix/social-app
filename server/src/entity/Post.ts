@@ -11,6 +11,7 @@ import {
 import {User} from "./User";
 import {PostLike} from "./PostLike";
 import * as url from "url";
+import {PostSave} from "./PostSave";
 
 
 @Entity('posts')
@@ -41,6 +42,10 @@ export class Post extends BaseEntity {
     // um post pode receber varios likes
     @OneToMany(() => PostLike, postLike => postLike.post)
     postLikes!: PostLike[];
+
+    // um post pode ser salvo por varios users
+    @OneToMany(() => PostSave, postSave => postSave.post)
+    postSaves!: PostSave[];
 
     @CreateDateColumn({type: "timestamp", default: () => "CURRENT_TIMESTAMP(6)"})
     public created_at!: Date;

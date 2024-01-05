@@ -59,7 +59,7 @@ export const resolvers = {
         }
 
         return {
-            jwtToken: sign({userId: user.id}, `${process.env.HASH_KEY}`, {expiresIn: "15m"})
+            jwtToken: sign({id: user.id}, `${process.env.HASH_KEY}`, {expiresIn: "15m"})
         };
-    }
+    },
 }

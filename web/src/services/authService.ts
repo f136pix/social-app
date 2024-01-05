@@ -1,5 +1,6 @@
-import axios from "axios";
-import {INewUser} from "@/types";
+import axios, {AxiosResponse} from "axios";
+import {ILoginUser, INewUser, IUser} from "@/types";
+import Cookies from "js-cookie";
 
 const headers = {
     "Content-Type": "application/json"
@@ -10,7 +11,12 @@ const graphQlClient = axios.create({
     headers: headers
 })
 
-export async function createUserAccount(data: INewUser) {
+const authClient = axios.create({
+    baseURL: "http://localhost:3000/auth",
+    headers: headers
+})
+
+export async function createUserAccountApi(data: INewUser) {
     const req = {
         query: `
         mutation{
@@ -20,6 +26,41 @@ export async function createUserAccount(data: INewUser) {
             }
         }`
     }
+    const resData: AxiosResponse = await graphQlClient.post('', req)
 
-    return graphQlClient.post('', req)
+    if (!resData.data.data.createUser) {
+        const errMsg = resData.data.errors[0].message
+        throw new Error(errMsg)
+    }
+    const userCreated = resData.data.data.createUser
+    return userCreated
+}
+
+export async function loginUserApi(data: ILoginUser) {
+    const req = {
+        query: `
+        mutation {
+            loginUser(userLogin:{email: "${data.email}", password:"${data.password}"}) {
+        jwtToken
+            }
+        }`
+    }
+    const resData: AxiosResponse = await graphQlClient.post('', req)
+
+    if (!resData.data.data.loginUser) {
+        const errMsg = resData.data.errors[0].message
+        throw new Error(errMsg)
+    }
+    const jwt = resData.data.data.loginUser.jwtToken
+    return jwt
+}
+
+export async function getCurrentUser(): Promise<IUser> {
+    const data: any = await authClient.get('', {
+        headers: {
+            Authorization: Cookies.get('jwt')
+
+        }
+    })
+    return data.data.user;
 }
