@@ -30,7 +30,7 @@ app.use('/graphql', graphqlHTTP({
 app.get('/auth', authenticateToken)
 
 AppDataSource.initialize().then((): void => {
-    app.listen(3000, (): void => {
+    app.listen(3333, (): void => {
         console.log(`[server]: Server is running at http://localhost:${3000}`);
     });
 }).catch((err): void => {

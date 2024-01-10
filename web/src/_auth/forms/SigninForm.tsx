@@ -29,8 +29,9 @@ function SigninForm() {
         if (session === true) {
             const isLogged: boolean = await checkAuthUser() // valida token e traz dados do user
             if (isLogged) {
+                console.log(isLogged)
                 form.reset()
-                navigate('/home')
+                navigate('/')
             }
         }
         if (typeof session === 'string') {
@@ -77,7 +78,7 @@ function SigninForm() {
                 <Button type="submit"
                         className={'shad-button_primary'}>{isAuthenticatingUser ? 'Carregando...' : 'Submit'}</Button>
                 <p className={'text-small-regular text-light-2 text-center mt-2'}> Não possui uma conta?
-                    <Link to={'/register'} className={'text-primary-500 text-sm font-semibold ml-1'}>REgistre-se!</Link>
+                    <Link to={'/register'} className={'text-primary-500 text-sm font-semibold ml-1'}>Registre-se!</Link>
                 </p>
             </form>
         </Form>

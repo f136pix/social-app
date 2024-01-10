@@ -2,7 +2,7 @@ import {createContext, useContext, useEffect, useState, ReactNode} from 'react';
 import {IContextType, IUser} from "@/types";
 import {getCurrentUser} from "@/services/authService.ts";
 import Cookies from "js-cookie";
-import {useNavigate} from "react-router-dom";
+import {redirect, useLocation, useNavigate} from "react-router-dom";
 
 const INITIAL_USER = {
     id: 0,
@@ -28,6 +28,7 @@ const AuthContext = createContext<IContextType>(INITIAL_STATE)
 
 
 const AuthProvider = ({children}: { children: ReactNode }) => {
+    const pathname = useLocation()
     const [user, setUser] = useState<IUser>(INITIAL_USER)
     const [isLoading, setIsLoading] = useState(false)
     const [isAuthenticated, setIsAuthenticated] = useState(false)
@@ -52,6 +53,17 @@ const AuthProvider = ({children}: { children: ReactNode }) => {
 
     // onload da page, verificando se o user esta autenticado
     useEffect(() => {
+        const publicRoute: boolean = (pathname.pathname == '/login' || pathname.pathname == '/register')
+        if (publicRoute) { // pags que nao necessitam autenticacao
+            checkAuthUser()
+                .then((bool: boolean) => {
+                    if (bool) {
+                        redirect('/')
+                        return
+                    }
+                })
+            return
+        }
         const jwt: string | undefined = Cookies.get('jwt');
         if (jwt == null || jwt == undefined || jwt.split(' ')[0] !== 'Bearer') {
             navigate('/login')
@@ -59,11 +71,9 @@ const AuthProvider = ({children}: { children: ReactNode }) => {
         checkAuthUser()
             .then((bool: boolean) => {
                 if (!bool) {
-                    console.log(bool)
                     navigate('/login')
                     return
                 }
-                console.log(bool)
             })
     }, []);
 

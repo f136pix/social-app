@@ -1,12 +1,14 @@
 import {Outlet, Navigate} from "react-router-dom";
-import React from 'react';
+import {useUserContext} from "@/context/AuthContext.tsx";
 
-function AuthLayout(props) {
-    const isAuth: boolean = false;
+function AuthLayout() {
+    // se o user estiver auth, redirecionando para a main page
+     const {isAuthenticated} = useUserContext()
+
 
     return (
         <>
-            {isAuth ? (
+            {isAuthenticated ? (
                 <Navigate to={"/"}/>
             ) : (
                 <>
@@ -17,7 +19,7 @@ function AuthLayout(props) {
                     <section className={'hidden xl:flex h-screen w-1/2 items-center justify-center bg-amber-950'}>
                         <div className={'flex flex-col text-white text-7xl font-bold'}>
                             <h1>Lorem Ipsum </h1>
-                            <h1 className={' py-10'}>Ipsum Lorem </h1>
+                            <h1 className={' py-10'}>dolor sit amet, </h1>
                         </div>
                     </section>
                 </>

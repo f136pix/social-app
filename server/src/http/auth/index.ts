@@ -24,9 +24,9 @@ export const authenticateToken = async (req: Request, res: Response, next: NextF
 
         res.send({user: currentUser});
     } catch (err: any) {
-        if (err.message = "jwt expired") {
+        if (err.message == "jwt expired") {
             res.send({err: "Token expirado"})
-        } else if (err.message = "not-found") {
+        } else if (err.message == "not-found") {
             res.send({err: 'User não encontrado'})
         } else if (err.message) {
             res.send({err: err.message})

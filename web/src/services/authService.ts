@@ -7,12 +7,12 @@ const headers = {
 }
 
 const graphQlClient = axios.create({
-    baseURL: "http://localhost:3000/graphql",
+    baseURL: "http://localhost:3333/graphql",
     headers: headers
 })
 
 const authClient = axios.create({
-    baseURL: "http://localhost:3000/auth",
+    baseURL: "http://localhost:3333/auth",
     headers: headers
 })
 
@@ -63,4 +63,14 @@ export async function getCurrentUser(): Promise<IUser> {
         }
     })
     return data.data.user;
+}
+
+export async function destroyJwt(): Promise<boolean> {
+    try{
+    Cookies.remove('jwt', {path: ''})
+        return true
+    } catch (err) {
+        console.log(err)
+        return false
+    }
 }

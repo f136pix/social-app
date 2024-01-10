@@ -6,9 +6,9 @@ import {PostLike} from "./entity/PostLike";
 import {PostSave} from "./entity/PostSave";
 
 export const AppDataSource : DataSource = new DataSource({
-    type: "mysql",
+    type: "postgres",
     host: "localhost",
-    port: 3306,
+    port: 5432,
     username: "root",
     password: "Filipeco123!",
     database: "social",

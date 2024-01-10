@@ -4,7 +4,11 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="f7e03dee-ebac-46b3-91d7-6428bb5bbb82" name="Changes" comment="" />
+    <list default="true" id="f7e03dee-ebac-46b3-91d7-6428bb5bbb82" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/src/data-source.ts" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/data-source.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/src/_auth/forms/SigninForm.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/web/src/_auth/forms/SigninForm.tsx" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -12,6 +16,9 @@
   </component>
   <component name="ComposerSettings">
     <execution />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
@@ -29,15 +36,16 @@
   "keyToString": {
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
+    "git-widget-placeholder": "master",
     "kotlin-language-version-configured": "true",
-    "last_opened_file_path": "/home/filipe/Desktop/social-app/social-app",
+    "last_opened_file_path": "/home/filipe/Desktop/social-app/server",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
     "node.js.selected.package.tslint": "(autodetect)",
     "nodejs_package_manager_path": "npm",
     "settings.editor.selected.configurable": "preferences.pluginManager",
-    "ts.external.directory.path": "/home/filipe/Desktop/social-app/social-app/node_modules/typescript/lib",
+    "ts.external.directory.path": "/home/filipe/Desktop/social-app/server/node_modules/typescript/lib",
     "vue.rearranger.settings.migration": "true"
   }
 }]]></component>
@@ -59,6 +67,7 @@
       <workItem from="1703990977231" duration="1105000" />
       <workItem from="1703992182365" duration="78000" />
       <workItem from="1703992268301" duration="59000" />
+      <workItem from="1704819610930" duration="381000" />
     </task>
     <servers />
   </component>

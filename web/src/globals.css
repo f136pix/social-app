@@ -109,7 +109,7 @@
   }
 
   .common-container {
-    @apply flex flex-col flex-1 items-center gap-10 overflow-scroll py-10 px-5 md:px-8 lg:p-14 custom-scrollbar;
+    @apply gap-10 overflow-scroll py-10 px-5 md:px-8 lg:p-14 custom-scrollbar;
   }
 
   /* All Users */
@@ -223,7 +223,7 @@
   }
 
   .leftsidebar-link {
-    @apply rounded-lg base-medium hover:bg-primary-500 transition;
+    @apply rounded-lg base-medium hover:underline decoration-blue-700 transition;
   }
 
   /* Post Card */
