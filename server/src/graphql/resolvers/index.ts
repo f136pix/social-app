@@ -4,6 +4,8 @@ import {BadRequest, InternalServerError, NotFound} from "http-errors";
 import {compare, hash} from "bcrypt";
 import {ILoginResponse} from "../../types";
 import {sign} from "jsonwebtoken";
+import {ok} from "node:assert";
+import {Post} from "../../entity/Post";
 
 export const resolvers = {
     // retrieve all users
@@ -62,4 +64,20 @@ export const resolvers = {
             jwtToken: sign({id: user.id}, `${process.env.HASH_KEY}`, {expiresIn: "15m"})
         };
     },
+
+    createPost: async (args: any, res: Response): Promise<Boolean> => {
+        const post: Post = new Post();
+        post.caption = args.postInput.caption
+        post.tags = args.postInput.tags
+        post.imageUrl = args.postInput.imageUrl
+        post.location = args.postInput.location
+        post.user = args.postInput.user
+
+
+        const savedPost: Post = await post.save()
+        if (!savedPost) {
+            return false
+        }
+        return true
+    }
 }

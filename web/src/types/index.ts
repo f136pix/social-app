@@ -14,12 +14,13 @@ export type IUpdateUser = {
 };
 
 export type INewPost = {
-    userId: string;
     caption: string;
-    file: File[];
-    location?: string;
-    tags?: string;
-};
+    tags: string
+    imageUrl : [string]
+    imageId: number
+    location: string
+    user: number
+}
 
 export type IUpdatePost = {
     postId: string;
@@ -39,6 +40,7 @@ export type IContextType = {
     setIsAuthenticated: React.Dispatch<React.SetStateAction<boolean>>,
     checkAuthUser: () => Promise<boolean>
 }
+
 
 export type IUser = {
     id: number;

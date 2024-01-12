@@ -1,6 +1,7 @@
 import {useMutation,} from '@tanstack/react-query'
-import {ILoginUser, INewUser} from "@/types";
+import {ILoginUser, INewPost, INewUser} from "@/types";
 import {createUserAccountApi, destroyJwt, loginUserApi} from "@/services/authService.ts";
+import {createPostApi} from "@/services/postService.ts";
 import {toast} from "@/components/ui/use-toast.ts";
 import Cookies from "js-cookie";
 
@@ -37,10 +38,26 @@ export const useLoginUserMutation = () => {
     })
 }
 
+export const useCreatePostMutation = () => {
+    return useMutation({
+        mutationFn: async (post: INewPost): Promise<boolean> => {
+            try {
+                console.log(post.imageUrl)
+                const isOk = await createPostApi(post)
+                console.log(isOk)
+                return true
+            } catch (err) {
+                console.log(err)
+                return false
+            }
+        }
+    })
+}
+
 export const useLogoutUserMutation = () => {
     return useMutation({
         mutationFn: async (): Promise<boolean> => {
-            const jwtRemoved : boolean = await destroyJwt()
+            const jwtRemoved: boolean = await destroyJwt()
             return jwtRemoved
         }
     })

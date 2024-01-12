@@ -10,6 +10,10 @@ import * as fs from 'fs';
 import {authenticateToken} from "./http/auth";
 
 const app: Express = express()
+
+// necessario para receber base64 imgs
+app.use(bodyParser({limit: '50mb'}))
+app.use(express.json({ limit: "50mb" }))
 app.use(bodyParser.json())
 
 app.use(cors({
@@ -17,6 +21,7 @@ app.use(cors({
     methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
     credentials: true,
 }));
+
 
 const graphqlSchema : string | Source = fs.readFileSync('./src/graphql/schema/index.graphql', 'utf-8')
 const graphqlResolvers : {} = resolvers

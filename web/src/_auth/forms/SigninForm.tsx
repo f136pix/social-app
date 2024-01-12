@@ -9,6 +9,7 @@ import {Button} from "@/components/ui/button.tsx";
 import {Link, useNavigate} from "react-router-dom";
 import {useUserContext} from "@/context/AuthContext.tsx";
 import {toast} from "@/components/ui/use-toast.ts";
+import {ToastAction} from "@/components/ui/toast.tsx";
 
 function SigninForm() {
     const {mutateAsync: loginUser, isPending: isAuthenticatingUser} = useLoginUserMutation()
@@ -36,7 +37,7 @@ function SigninForm() {
         }
         if (typeof session === 'string') {
             toast({
-                title: session
+                title: session,
             })
         }
     }

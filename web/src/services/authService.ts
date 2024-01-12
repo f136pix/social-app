@@ -1,5 +1,5 @@
 import axios, {AxiosResponse} from "axios";
-import {ILoginUser, INewUser, IUser} from "@/types";
+import {ILoginUser, INewPost, INewUser, IUser} from "@/types";
 import Cookies from "js-cookie";
 
 const headers = {
@@ -66,11 +66,14 @@ export async function getCurrentUser(): Promise<IUser> {
 }
 
 export async function destroyJwt(): Promise<boolean> {
-    try{
-    Cookies.remove('jwt', {path: ''})
+    try {
+        Cookies.remove('jwt', {path: ''})
         return true
     } catch (err) {
         console.log(err)
         return false
     }
 }
+
+
+

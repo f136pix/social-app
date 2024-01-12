@@ -2,7 +2,7 @@ import {
     BaseEntity,
     Column,
     CreateDateColumn,
-    Entity,
+    Entity, Generated,
     ManyToOne,
     OneToMany,
     PrimaryGeneratedColumn,
@@ -30,6 +30,7 @@ export class Post extends BaseEntity {
     imageUrl !: string
 
     @Column()
+    @Generated("uuid")
     imageId !: string
 
     @Column({length: 2200})

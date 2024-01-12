@@ -1,6 +1,6 @@
 import React from 'react';
 import {ImageDown} from "lucide-react";
-import PostForms from "@/components/forms/PostForms.tsx";
+import PostForms, {PostForm} from "@/components/forms/PostForms.tsx";
 
 function CreatePost(props) {
     return (
@@ -10,7 +10,7 @@ function CreatePost(props) {
                     <ImageDown className={'w-[-36px] h-[-36px]'}></ImageDown>
                     <h2 className={'text-center w-full h3-bold md:h2-bold'}>Criar post</h2>
                 </div>
-                <PostForms />
+                <PostForm />
             </div>
         </div>
     );

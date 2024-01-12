@@ -1,5 +1,7 @@
 #graphql
 
+#model post
+
 #model user
 type User {
     id: ID!
@@ -15,6 +17,15 @@ input UserInput {
     email: String!
     username: String!
     password: String!
+}
+
+#create post model
+input PostInput {
+    caption: String!
+    tags: String!
+    imageUrl : [String]!
+    location: String!
+    user: Int!
 }
 
 #model mutation login
@@ -34,6 +45,7 @@ type RootQuery {
 type RootMutation {
     createUser(userInput: UserInput) : User
     loginUser(userLogin: UserLogin) : LoginResponse
+    createPost(postInput: PostInput) : Boolean
 }
 
 schema {
